@@ -11,7 +11,7 @@ Pod::Spec.new do |spec|
   spec.version      = "0.1.6"
   spec.summary      = "Flex Layout for iOS"
   spec.description  = <<-DESC
-    flex layout for iOS powered by yoga
+    flex layout for iOS, powered by yoga
                    DESC
   spec.homepage     = "https://github.com/faimin/ZDFlexLayoutKit"
   spec.license      = "MIT"
@@ -24,7 +24,7 @@ Pod::Spec.new do |spec|
   }
   spec.prefix_header_file = false
 
-  spec.header_dir = "./"
+  #spec.header_dir = "./"
   spec.module_name = 'ZDFlexLayoutKit'
   spec.pod_target_xcconfig = {
     'DEFINES_MODULE' => 'YES',
