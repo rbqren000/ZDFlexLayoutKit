@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |spec|
   spec.name         = "ZDFlexLayoutKit"
-  spec.version      = "0.1.6"
+  spec.version      = "0.1.7"
   spec.summary      = "Flex Layout for iOS"
   spec.description  = <<-DESC
     flex layout for iOS, powered by yoga
@@ -28,38 +28,43 @@ Pod::Spec.new do |spec|
   spec.module_name = 'ZDFlexLayoutKit'
   spec.pod_target_xcconfig = {
     'DEFINES_MODULE' => 'YES',
+    'BUILD_LIBRARY_FOR_DISTRIBUTION' => 'YES',
+    'GCC_PREPROCESSOR_DEFINITIONS' => '$(inherited) ZDFL=1',
+    'SWIFT_ACTIVE_COMPILATION_CONDITIONS' => '$(inherited) ZDFL',
+    #'OTHER_SWIFT_FLAGS' => '$(inherited) ZDFL'
   }
   
   spec.swift_versions = ['5.1']
   
   spec.subspec 'Header' do |s|
-    s.source_files = "Source/Header/ZDFlexLayoutKit.{h,m}"
+    s.source_files = "Sources/Header/ZDFlexLayoutKit.{h,m}"
   end
   
   spec.subspec 'Core' do |s|
-    s.source_files = "Source/Core/**/*.{h,m}"
-    s.public_header_files = "Source/Core/Public/*.h"
-    s.private_header_files = "Source/Core/Private/*.h"
+    s.source_files = "Sources/Core/**/*.{h,m}"
+    s.public_header_files = "Sources/Core/Public/*.h"
+    s.private_header_files = "Sources/Core/Private/*.h"
     s.dependency 'Yoga'
     s.dependency 'ZDFlexLayoutKit/Header'
   end
   
   spec.subspec 'OCMaker' do |s|
-    s.source_files = "Source/OCMaker/*.{h,m}"
+    s.source_files = "Sources/OCMaker/*.{h,m}"
     s.dependency 'ZDFlexLayoutKit/Core'
     s.dependency 'ZDFlexLayoutKit/Header'
   end
   
   spec.subspec 'Helper' do |s|
-    s.source_files = "Source/Helper/*.{h,m}"
+    s.source_files = "Sources/Helper/*.{h,m}"
+    s.exclude_files = "Sources/Helper/NSObject+ZDFlexLayoutFrameCache.{h,m}"
     s.dependency 'ZDFlexLayoutKit/Core'
     s.dependency 'ZDFlexLayoutKit/Header'
   end
   
   spec.subspec 'SwiftMaker' do |s|
-    s.source_files = "Source/SwiftMaker/*.swift"
+    s.source_files = "Sources/SwiftMaker/*.swift"
+    s.exclude_files = "Sources/SwiftMaker/ZDSFlexLayoutChain.swift"
     s.dependency 'ZDFlexLayoutKit/Core'
-    s.dependency 'ZDFlexLayoutKit/Header'
   end
   
 end
